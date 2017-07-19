@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+        name="viewport">
+        <title>
+            微信直播
+        </title>
+        <link rel="stylesheet" href="__STATIC__/css/common.css">
+        <style type="text/css" media="screen">
+
+           body {
+    margin: 0;
+    padding: 0;
+}
+.bg {
+    background: url('https://img.alicdn.com/imgextra/i2/379137982/TB2OPjUXFIkyKJjy0FgXXX0mFXa_!!379137982.jpg')no-repeat center center;
+   
+    height: 100%;
+    min-height: 1000px;
+    background-size: cover;
+    overflow: hidden
+}
+header {
+    padding-top: 2%;
+    height: 40px;
+    padding-bottom: 60px;
+}
+.line {
+    position: fixed;
+    top: 6px;
+    left: 0px;
+    width: 31%;
+    height: 30px;
+    line-height: 30px;
+    color: #fff;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    background-color:rgba(0,0,0,0.6);
+}
+.line p {
+    line-height: 30px;
+    padding-left: 10px;
+}
+.line img {
+    vertical-align: top;
+    width: 14%;
+    margin-top: 3px;
+}
+.tou {
+    width: 67%;
+}
+.tou ul li {
+    width: 10%;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    float: right;
+    margin-right: 4%;
+    background: #fff;
+}
+.tou ul li img {
+    width: 100%;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+.jian {
+    width: 4%;
+    margin-right: 2%;
+}
+.jian img {
+    width: 70%;
+    vertical-align: middle;
+}
+.time {
+    width: 100%;
+   
+}
+.time p {
+    margin: 0 auto;
+    width: 18%;
+    background-color: rgba(0,0,0,0.3);
+    height: 25px;
+    line-height: 25px;
+    color: #fff;
+    text-align: center;
+    border-radius: 25px;
+}
+.liao {
+    width: 100%;
+    margin-top: 10px;
+    padding: 0 3%;
+    height: auto;
+    padding-bottom: 3%;
+}
+.liao .ath {
+    width: 8%;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    margin-right: 4%;
+    background: #fff
+}
+.liao .ath img {
+    width: 100%;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+.con-img {
+    width: 160px;
+    height: auto;
+    border-radius: 7px;
+   
+}
+.con-img img {
+    width: 160px;
+    height: auto;
+    border-radius: 7px;
+}
+
+.con-text {
+    width: 260px;
+    height: auto;
+    border-radius: 7px;
+    background: #fff;
+   padding: 10px 10px 4px 10px;
+}
+.con-text img {
+    width: 160px;
+    height: auto;
+    border-radius: 7px;
+}
+.yjfz{
+     border-top: 1px dashed #ccc;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    margin-top: 4%;
+
+}
+.yjfz input{
+    background: #47ada9;
+    color: #fff;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    width: 90px;
+    border-radius: 25px;
+}
+.one{
+    margin-top: 3%;
+}
+.tanchu{
+ 
+  
+  
+  
+   width: 100%;
+   position: fixed;
+    margin: 0 auto;
+    height: 161px;
+    position: fixed;
+    text-align: center;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto;
+   
+   display: none;
+
+}
+.tanchu p{
+       background-color: rgba(0,0,0,0.6);
+    width: 50px;
+    line-height: 40px;
+    color: #fff;
+    text-align: center;
+    width: 60%;
+    font-size: 14px;
+    margin: 0 auto;
+    height: 40px;
+    border-radius: 7px;
+
+}
+
+
+@media screen and (min-width: 768px){
+.line p {
+
+    line-height: 55px;
+    padding-left: 34px;
+    font-size: 20px!important;
+}
+.line {
+       top: 13px;
+    height: 55px;
+    line-height: 55px;
+  
+}
+.liao .ath {
+    width: 7%;
+   
+}
+.con-img{
+    width: 240px;
+}
+.con-img img {
+    width: 240px;
+   
+}
+.con-text {
+    width: 320px;
+   
+}
+.time p {
+    
+    width: 10%;
+    
+}
+.tanchu p {
+
+    width: 30%;
+ 
+}
+}
+@media screen and (max-width: 320px){
+
+.line p {
+    font-size: 12px;
+}
+.line img {
+  
+    margin-top: 5px;
+}
+.con-text {
+    width: 220px;
+  
+}
+}
+        </style>
+    </head>
+    
+    <body>
+        <div class="bg">
+            <header >
+                <!--在线人数-->
+                <div class="line fl">
+                    <p class="f14">
+                        <img src="https://img.alicdn.com/imgextra/i4/379137982/TB2w3_PXU.iyKJjSspdXXbB_pXa_!!379137982.png"
+                        alt="">
+                        &nbsp;5000人在线
+                    </p>
+                </div>
+                <!--箭头-->
+                <div class="jian fr">
+                    <img src="https://img.alicdn.com/imgextra/i3/379137982/TB2LX3HXG3PyuJjy1zkXXcjRFXa_!!379137982.png"
+                    alt="">
+                </div>
+                <!--头像-->
+                <div class="tou fr">
+                    <ul>
+                        <li>
+                            <img src="https://img.alicdn.com/imgextra/i2/379137982/TB2vPCIX4olyKJjSZFDXXbNfpXa_!!379137982.jpg"
+                            alt="">
+                        </li>
+                        <li>
+                            <img src="https://img.alicdn.com/imgextra/i2/379137982/TB2q0DEarglyKJjSZFuXXaE6FXa_!!379137982.jpg"
+                            alt="">
+                        </li>
+                        <li>
+                            <img src="https://img.alicdn.com/imgextra/i3/379137982/TB2WTaJX_AlyKJjSZFhXXc8XFXa_!!379137982.jpg"
+                            alt="">
+                        </li>
+                        <li>
+                            <img src="https://img.alicdn.com/imgextra/i4/379137982/TB28qPPXU7iyKJjSszcXXavlpXa_!!379137982.jpg"
+                            alt="">
+                        </li>
+                        <li>
+                            <img src="https://img.alicdn.com/imgextra/i4/379137982/TB2dFARXHAPyuJjy0FjXXXhfFXa_!!379137982.jpg"
+                            alt="">
+                        </li>
+                        <li>
+                            <img src="https://img.alicdn.com/imgextra/i2/379137982/TB2JtKIX0wmyKJjSZFoXXbmBXXa_!!379137982.jpg"
+                            alt="">
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="clear" >
+                    
+                </div>
+            </header>
+           <!-- &lt;!&ndash;时间&ndash;&gt;
+            <div class="time">
+                <p>
+                    02:20
+                </p>
+            </div>
+            &lt;!&ndash;复制成功提示&ndash;&gt;
+             <div class="tanchu">
+        <p>复制成功，请打开手机淘宝查看</p>
+            
+        </div>
+            &lt;!&ndash;内容&ndash;&gt;
+            <div class="liao">
+               <div class="one ">
+                <div class="ath fl">
+                  <img src="https://img.alicdn.com/imgextra/i4/379137982/TB2v2KHX6ZnyKJjSZFLXXXWqpXa_!!379137982.png"
+                    alt="">
+                </div>
+                <div class="con-img fl">
+                    <a href="/images/weixin-01.jpg"><img src="/images/weixin-01.jpg" alt=""></a>
+                </div>
+                <div class="clear" >
+                    
+                </div>
+                </div>
+
+                <div class="one " >
+                <div class="ath fl">
+                    <img src="https://img.alicdn.com/imgextra/i4/379137982/TB2v2KHX6ZnyKJjSZFLXXXWqpXa_!!379137982.png"
+                    alt="">
+                </div>
+                <div class="con-text fl">
+                   <div class="f12 wenan">
+                 【意可可】免打孔创意卫生间简约厕纸盒<br/>
+                 【淘抢购28元】券后【18元】包邮<br/>
+                  免钉免钻，防潮防水，采用ABS原材料，不易老化，<br/>健康环保，半自动开关，取用更方便【赠运费险】<br/>
+                  &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;<br/>
+                 复制这条信息，打开手机淘宝即可领券下单￥jIuT0ZJJsJK￥<br/>
+                    <a href="http://00o.cn/4xtPpDK" >http://00o.cn/4xtPpDK。</a><br/>
+                </div>
+
+                <div class="yjfz"> <input type="button" name="" value="一键复制" class="copy"> </div>
+
+                </div>
+                <div class="clear" >
+                    
+                </div>
+                </div>
+
+
+
+
+            </div>-->
+            {volist name='data' id='vo'}
+              <!--时间-->
+            <div class="time">
+                <p>
+                    {$vo.time|date='H:i',###}
+                </p>
+            </div>
+
+              <!--内容-->
+            <div class="liao">
+               <div class="one ">
+                <div class="ath fl">
+                    <img src="https://img.alicdn.com/imgextra/i4/379137982/TB2v2KHX6ZnyKJjSZFLXXXWqpXa_!!379137982.png"
+                    alt="">
+                </div>
+                <div class="con-img fl">
+                    <a href="{$vo.img_url}"><img src="{$vo.img_url}" alt=""></a>
+                </div>
+                <div class="clear" >
+                    
+                </div>
+                </div>
+
+                <div class="one " >
+                <div class="ath fl">
+                    <img src="https://img.alicdn.com/imgextra/i4/379137982/TB2v2KHX6ZnyKJjSZFLXXXWqpXa_!!379137982.png"
+                    alt="">
+                </div>
+                <div class="con-text fl">
+                   <div class="f12 wenan2">
+                       {$vo.content}
+                   </div>
+
+                <div class="yjfz"> <input type="button" name="" value="一键复制" class="copy2"> </div>
+
+                </div>
+                <div class="clear" >
+                    
+                </div>
+                </div>
+            </div>
+            {/volist}
+        </div>
+
+    </body>
+        <script src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
+        <script type="text/javascript" src="__STATIC__/js/clipboard.js">
+    </script>
+
+    <script type="text/javascript">
+        var clipboard = new Clipboard('.copy', {
+            target: function() {
+                return document.querySelector('.wenan');
+            }
+        });
+        clipboard.on('success',
+        function(e) {
+           
+            //显示完三秒之后消失
+             $ ('.tanchu').show ().delay (3000).fadeOut ();
+           
+            console.info('Action:', e.action);
+            console.info('Text:', e.text);
+            console.info('Trigger:', e.trigger);
+            e.clearSelection();
+        });
+
+
+         var clipboard = new Clipboard('.copy2', {
+            target: function() {
+                return document.querySelector('.wenan2');
+            }
+        });
+        clipboard.on('success',
+        function(e) {
+            //显示完三秒之后消失
+              $ ('.tanchu').show ().delay (3000).fadeOut ();
+           
+            console.info('Action:', e.action);
+            console.info('Text:', e.text);
+            console.info('Trigger:', e.trigger);
+            e.clearSelection();
+        });
+                          
+    </script>
+
+</html>
