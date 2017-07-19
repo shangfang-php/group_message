@@ -32,7 +32,7 @@ header {
 .line {
     position: fixed;
     top: 6px;
-    left: 0px;
+    left: 0;
     width: 31%;
     height: 30px;
     line-height: 30px;
@@ -152,28 +152,24 @@ header {
     margin-top: 3%;
 }
 .tanchu{
- 
-  
-  
-  
    width: 100%;
    position: fixed;
     margin: 0 auto;
     height: 161px;
-    position: fixed;
+
     text-align: center;
     top: 0;
     right: 0;
     left: 0;
     bottom: 0;
-    margin: auto;
-   
+
+
    display: none;
 
 }
 .tanchu p{
        background-color: rgba(0,0,0,0.6);
-    width: 50px;
+
     line-height: 40px;
     color: #fff;
     text-align: center;
@@ -340,10 +336,6 @@ header {
                     
                 </div>
                 </div>
-
-
-
-
             </div>-->
             {volist name='data' id='vo'}
               <!--时间-->
@@ -352,7 +344,10 @@ header {
                     {$vo.time|date='H:i',###}
                 </p>
             </div>
+            <div class="tanchu">
+                <p>复制成功，请打开手机淘宝查看</p>
 
+            </div>
               <!--内容-->
             <div class="liao">
                <div class="one ">
