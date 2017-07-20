@@ -14,7 +14,7 @@ return [
         'group' => '\w+',
     ],
 
-    ':group'  =>  'index/index/index', ##用户注册
+    ':group'  =>  'index', ##用户注册
     /*'[user]'     => [
         ':'   => ['index/index/detail',['method' => 'get']]
     ],

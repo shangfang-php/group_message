@@ -9,6 +9,7 @@
         <title>
             微信直播
         </title>
+        <script src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
         <link rel="stylesheet" href="__STATIC__/css/common.css">
         <style type="text/css" media="screen">
 
@@ -109,7 +110,7 @@ header {
 }
 .con-img {
     width: 160px;
-    height: auto;
+    height: 250px;
     border-radius: 7px;
    
 }
@@ -180,6 +181,15 @@ header {
     border-radius: 7px;
 
 }
+iframe{
+    border-radius: 7px;
+      background: #fff;
+  height:243px!important;
+ }
+          iframe body a img{
+            height: 300px;
+    border-radius: 7px;
+ }
 
 
 @media screen and (min-width: 768px){
@@ -200,7 +210,7 @@ header {
    
 }
 .con-img{
-    width: 240px;
+    width: 80%;
 }
 .con-img img {
     width: 240px;
@@ -288,55 +298,7 @@ header {
                     
                 </div>
             </header>
-           <!-- &lt;!&ndash;时间&ndash;&gt;
-            <div class="time">
-                <p>
-                    02:20
-                </p>
-            </div>
-            &lt;!&ndash;复制成功提示&ndash;&gt;
-             <div class="tanchu">
-        <p>复制成功，请打开手机淘宝查看</p>
-            
-        </div>
-            &lt;!&ndash;内容&ndash;&gt;
-            <div class="liao">
-               <div class="one ">
-                <div class="ath fl">
-                  <img src="https://img.alicdn.com/imgextra/i4/379137982/TB2v2KHX6ZnyKJjSZFLXXXWqpXa_!!379137982.png"
-                    alt="">
-                </div>
-                <div class="con-img fl">
-                    <a href="/images/weixin-01.jpg"><img src="/images/weixin-01.jpg" alt=""></a>
-                </div>
-                <div class="clear" >
-                    
-                </div>
-                </div>
-
-                <div class="one " >
-                <div class="ath fl">
-                    <img src="https://img.alicdn.com/imgextra/i4/379137982/TB2v2KHX6ZnyKJjSZFLXXXWqpXa_!!379137982.png"
-                    alt="">
-                </div>
-                <div class="con-text fl">
-                   <div class="f12 wenan">
-                 【意可可】免打孔创意卫生间简约厕纸盒<br/>
-                 【淘抢购28元】券后【18元】包邮<br/>
-                  免钉免钻，防潮防水，采用ABS原材料，不易老化，<br/>健康环保，半自动开关，取用更方便【赠运费险】<br/>
-                  &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;<br/>
-                 复制这条信息，打开手机淘宝即可领券下单￥jIuT0ZJJsJK￥<br/>
-                    <a href="http://00o.cn/4xtPpDK" >http://00o.cn/4xtPpDK。</a><br/>
-                </div>
-
-                <div class="yjfz"> <input type="button" name="" value="一键复制" class="copy"> </div>
-
-                </div>
-                <div class="clear" >
-                    
-                </div>
-                </div>
-            </div>-->
+           
             {volist name='data' id='vo'}
               <!--时间-->
             <div class="time">
@@ -356,7 +318,13 @@ header {
                     alt="">
                 </div>
                 <div class="con-img fl">
-                    <a href="{$vo.img_url}"><img src="{$vo.img_url}" alt=""></a>
+                    <iframe class='iframe{$vo.id}' data="{$vo.img_url}" style="height:300px;width: 160px;" scrolling="no" frameborder="0"></iframe>
+                    <script type="text/javascript">
+                        $('.iframe{$vo.id}').contents().find("body").css({"margin":"0px"}).append('<a href="{$vo.img_url}" target="_blank"><img style="width:100%;height:auto;" src="{$vo.img_url}"></a>')
+                    </script>
+                    <!--<a href="http://read.html5.qq.com/image?src=forum&q=5&r=0&imgflag=7&imageUrl={$vo.img_url}">
+                        <img src="http://read.html5.qq.com/image?src=forum&q=5&r=0&imgflag=7&imageUrl={$vo.img_url}" alt="">
+                    </a>-->
                 </div>
                 <div class="clear" >
                     
@@ -385,11 +353,17 @@ header {
         </div>
 
     </body>
-        <script src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
-        <script type="text/javascript" src="__STATIC__/js/clipboard.js">
-    </script>
 
+    
+    <script type="text/javascript" src="__STATIC__/js/clipboard.js"></script>
     <script type="text/javascript">
+        $(function(){
+            $(window).scroll(function() {
+                if($(document).scrollTop() >= $(document).height() - $(window).height()) {
+                    getHistoryMessage();
+                }
+            });
+        });
         var clipboard = new Clipboard('.copy', {
             target: function() {
                 return document.querySelector('.wenan');
@@ -408,13 +382,12 @@ header {
         });
 
 
-         var clipboard = new Clipboard('.copy2', {
+        var clipboard = new Clipboard('.copy2', {
             target: function() {
                 return document.querySelector('.wenan2');
             }
         });
-        clipboard.on('success',
-        function(e) {
+        clipboard.on('success',function(e) {
             //显示完三秒之后消失
               $ ('.tanchu').show ().delay (3000).fadeOut ();
            
@@ -423,6 +396,11 @@ header {
             console.info('Trigger:', e.trigger);
             e.clearSelection();
         });
+
+        function getHistoryMessage(){
+            var nowPage = $('#nowPage').val();
+            var group   = $('#group').val();
+        }
                           
     </script>
 
