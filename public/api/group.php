@@ -6,7 +6,7 @@ if(!$group_string){
 	returnAjaxMsg('201', '生成群标识失败!');
 }
 if($group_name){
-	$sql 	=	'insert into groups (unique_str,name) values ("'.$group_string.',"'.$group_name.'")';
+	$sql 	=	'insert into groups (unique_str,name) values ("'.$group_string.'","'.$group_name.'")';
 }else{
 	$sql 	=	'insert into groups (unique_str) values ("'.$group_string.'")';
 }
