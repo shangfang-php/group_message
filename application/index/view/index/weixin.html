@@ -311,20 +311,20 @@ iframe{
 
             </div>
               <!--内容-->
-            <div class="liao">
+            <div class="liao" data-id={$vo.id}>
                <div class="one ">
                 <div class="ath fl">
                     <img src="https://img.alicdn.com/imgextra/i4/379137982/TB2v2KHX6ZnyKJjSZFLXXXWqpXa_!!379137982.png"
                     alt="">
                 </div>
                 <div class="con-img fl">
-                    <iframe class='iframe{$vo.id}' data="{$vo.img_url}" style="height:300px;width: 160px;" scrolling="no" frameborder="0"></iframe>
+                    <iframe class='iframe{$vo.id}' data="{$vo.img_url}" style="height:300px;width: 160px;" scrolling="no" frameborder="0">
+                    </iframe>
+                    
                     <script type="text/javascript">
                         $('.iframe{$vo.id}').contents().find("body").css({"margin":"0px"}).append('<a href="{$vo.img_url}" target="_blank"><img style="width:100%;height:auto;" src="{$vo.img_url}"></a>')
                     </script>
-                    <!--<a href="http://read.html5.qq.com/image?src=forum&q=5&r=0&imgflag=7&imageUrl={$vo.img_url}">
-                        <img src="http://read.html5.qq.com/image?src=forum&q=5&r=0&imgflag=7&imageUrl={$vo.img_url}" alt="">
-                    </a>-->
+                    
                 </div>
                 <div class="clear" >
                     
@@ -350,19 +350,27 @@ iframe{
                 </div>
             </div>
             {/volist}
+            <p id="end_msg" style="color:grey;font-size:12px;text-align: center;width:100%;display: none">-----没有数据-----</p>
         </div>
 
     </body>
 
+    <input type="hidden" id='current_page' value="{$current_page}">
+    <input type="hidden" id='group' value="{$group}">
+
     
     <script type="text/javascript" src="__STATIC__/js/clipboard.js"></script>
     <script type="text/javascript">
+        var isSync = false;
+        
         $(function(){
             $(window).scroll(function() {
-                if($(document).scrollTop() >= $(document).height() - $(window).height()) {
+                
+                if($(document).scrollTop() >= $(document).height() - $(window).height() - 1) {
                     getHistoryMessage();
                 }
             });
+            setInterval("getNewMessage()", 1000 * 10);  //获取最新消息
         });
         var clipboard = new Clipboard('.copy', {
             target: function() {
@@ -391,17 +399,104 @@ iframe{
             //显示完三秒之后消失
               $ ('.tanchu').show ().delay (3000).fadeOut ();
            
-            console.info('Action:', e.action);
+            /*console.info('Action:', e.action);
             console.info('Text:', e.text);
-            console.info('Trigger:', e.trigger);
+            console.info('Trigger:', e.trigger);*/
             e.clearSelection();
         });
 
         function getHistoryMessage(){
-            var nowPage = $('#nowPage').val();
+            if(isSync){
+                return false;
+            }
+            isSync      = true; //正在同步
+            var nowPage = $('#current_page').val() ? parseInt($('#current_page').val()) : 1;
             var group   = $('#group').val();
+            var url     = '/api/message.php?action=select';
+            nowPage     = nowPage + 1;
+            var data    = {page:nowPage, pageSize:5, group:group};
+            console.log(data);
+            $.post(url, data, function(msg){
+                if(msg.code == 200 && msg.data.length > 0){
+                    $('#current_page').val(nowPage);
+                    var html    =  make_data_html(msg.data);
+                    $('.liao:last').after(html);
+                }else{
+                    $('#end_msg').show();
+                }
+                isSync = false;
+            },"json");
         }
-                          
+
+        function make_data_html(data){
+            var html = '';
+            $.each(data, function(i,v){
+                var time = unixtodate(v.time);
+                var img_url = v.img_url;
+                var id = v.id
+                html += '<div class="time"><p>'+time+'</p></div><div class="tanchu"><p>复制成功，请打开手机淘宝查看</p></div>';
+                html += '<div class="liao" data-id="'+id+'">\
+                           <div class="one ">\
+                            <div class="ath fl">\
+                                <img src="https://img.alicdn.com/imgextra/i4/379137982/TB2v2KHX6ZnyKJjSZFLXXXWqpXa_!!379137982.png"\
+                                alt="">\
+                            </div>\
+                            <div class="con-img fl">\
+                                <iframe class="iframe'+id+'" data="'+img_url+'" style="height:300px;width: 160px;" scrolling="no" frameborder="0">\
+                                </iframe>\
+                                <script type="text/javascript">\
+                                    $(".iframe'+id+'").contents().find("body").css({"margin":"0px"}).append(\'<a href="'+img_url+'" target="_blank"><img style="width:100%;height:auto;" src="'+img_url+'"></a>\')\
+                                <\/script>\
+                            </div>\
+                            <div class="clear" >\
+                            </div>\
+                            </div>\
+                            <div class="one " >\
+                            <div class="ath fl">\
+                                <img src="https://img.alicdn.com/imgextra/i4/379137982/TB2v2KHX6ZnyKJjSZFLXXXWqpXa_!!379137982.png" alt="">\
+                            </div>\
+                            <div class="con-text fl">\
+                               <div class="f12 wenan2">\
+                                   '+v.content+'\
+                               </div>\
+                            <div class="yjfz"> <input type="button" name="" value="一键复制" class="copy2"> </div>\
+                            </div>\
+                            <div class="clear" ></div>\
+                            </div>\
+                        </div>';
+            });
+            return html;
+        }
+
+
+        function unixtodate(unixTime) {
+            unixTime = parseInt(unixTime) + parseInt(8) * 60 * 60;
+
+            var time = new Date(unixTime * 1000);
+            var ymdhis = "";
+            ymdhis += time.getUTCFullYear() + "-";
+            ymdhis += (time.getUTCMonth()+1) + "-";
+            ymdhis += time.getUTCDate();
+            
+            ymdhis += " " + time.getUTCHours() + ":";
+            ymdhis += time.getUTCMinutes() + ":";
+            ymdhis += time.getUTCSeconds();
+            return ymdhis;
+        }
+
+        function getNewMessage(){
+            var id = $('.liao:first').attr('data-id');
+            var url = '/get_new_message';
+            var group = $('#group').val();
+            var data = {id:id,group:group};
+            $.post(url, data, function(msg){
+                //console.log(msg);
+                if(msg.code == 200 && msg.data.length > 0){
+                    var html    =  make_data_html(msg.data);
+                    $('.time:first').before(html);
+                }
+            },"json");
+        }
     </script>
 
 </html>

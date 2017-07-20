@@ -15,6 +15,7 @@ return [
     ],
 
     ':group'  =>  'index', ##用户注册
+    'get_new_message' => 'index/get_new_message',
     /*'[user]'     => [
         ':'   => ['index/index/detail',['method' => 'get']]
     ],
