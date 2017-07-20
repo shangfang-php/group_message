@@ -51,6 +51,14 @@ function add_message(){
 	}
 	$group_id 	=	$res['id'];
 
+	preg_match_all('/https?:\/\/?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?/', $content, $matches);
+	if($matches[0]){ ##有匹配的URL
+		foreach($matches[0] as $url){
+			$url_str	=	'<a href="'.$url.'">'.$url.'</a>';
+			$content 	=	str_replace($url, $url_str, $content);
+		}
+	}
+
 	$sql 	=	"insert into message (group_id,img_url,content,time) values ('{$group_id}', '{$img_url}', '{$content}','{$time}')";
 	$info 	=	$db->query($sql);
 	if($info){
