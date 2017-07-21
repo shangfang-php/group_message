@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('Asia/Chongqing');
 include_once 'db.class.php';
 $db 	=	Db::getInstance();
 $code	=	'0';

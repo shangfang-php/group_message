@@ -323,7 +323,7 @@ iframe{
               <!--时间-->
             <div class="time">
                 <p>
-                    {$vo.time|date='Y-m-d H:i:s',###}
+                    {$vo.time|date='n-j H:i:s',###}
                 </p>
             </div>
             <div class="tanchu">
@@ -494,11 +494,11 @@ iframe{
             //unixTime = parseInt(unixTime) + parseInt(8) * 60 * 60;
 
             var time = new Date(unixTime * 1000);
-            var year = time.getFullYear();
+            //var year = time.getFullYear();
             var month= time.getMonth()+1;
-            month   =   month < 10 ? '0'+month : month;
+            //month   =   month < 10 ? '0'+month : month;
             var date = time.getDate();
-            date   =   date < 10 ? '0'+date : date;
+            //date   =   date < 10 ? '0'+date : date;
             var hour = time.getHours();
             hour   =   hour < 10 ? '0'+hour : hour;
             var minute=time.getMinutes();
@@ -506,7 +506,7 @@ iframe{
             var second=time.getSeconds();
             second   =   second < 10 ? '0'+second : second;
             
-            return year+'-'+month+'-'+date+' '+hour+':'+minute+':'+second;
+            return month+'-'+date+' '+hour+':'+minute+':'+second;
         }
 
         function getNewMessage(){
