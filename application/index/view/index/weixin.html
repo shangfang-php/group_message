@@ -13,17 +13,30 @@
         <link rel="stylesheet" href="__STATIC__/css/common.css">
         <style type="text/css" media="screen">
 
-           body {
+           body:before {
+              content: ' ';
     margin: 0;
     padding: 0;
+             position: fixed;
+               z-index: -1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+             
+              background: url('https://img.alicdn.com/imgextra/i2/379137982/TB2OPjUXFIkyKJjy0FgXXX0mFXa_!!379137982.jpg') no-repeat center center;
+        
+            
 }
 .bg {
-    background: url('https://img.alicdn.com/imgextra/i2/379137982/TB2OPjUXFIkyKJjy0FgXXX0mFXa_!!379137982.jpg')no-repeat center center;
+   
    
     height: 100%;
     min-height: 1000px;
     background-size: cover;
-    overflow: hidden
+     
+  overflow:hidden;
+  width:100%;
 }
 header {
     padding-top: 2%;
@@ -81,7 +94,7 @@ header {
 }
 .time p {
     margin: 0 auto;
-    width: 18%;
+    width: 45%;
     background-color: rgba(0,0,0,0.3);
     height: 25px;
     line-height: 25px;
@@ -159,7 +172,7 @@ header {
     height: 161px;
 
     text-align: center;
-    top: 0;
+    top: 50%;
     right: 0;
     left: 0;
     bottom: 0;
@@ -222,7 +235,7 @@ iframe{
 }
 .time p {
     
-    width: 10%;
+    width: 30%;
     
 }
 .tanchu p {
@@ -244,19 +257,26 @@ iframe{
     width: 220px;
   
 }
+  .tanchu p {
+   
+    font-size: 12px;
+    
+}
 }
         </style>
     </head>
     
     <body>
         <div class="bg">
+          
+          <div >
             <header >
                 <!--在线人数-->
                 <div class="line fl">
                     <p class="f14">
                         <img src="https://img.alicdn.com/imgextra/i4/379137982/TB2w3_PXU.iyKJjSspdXXbB_pXa_!!379137982.png"
                         alt="">
-                        &nbsp;5000人在线
+                        &nbsp;<span id="online_nums">{$online_nums}</span>人在线
                     </p>
                 </div>
                 <!--箭头-->
@@ -303,7 +323,7 @@ iframe{
               <!--时间-->
             <div class="time">
                 <p>
-                    {$vo.time|date='H:i',###}
+                    {$vo.time|date='Y-m-d H:i:s',###}
                 </p>
             </div>
             <div class="tanchu">
@@ -352,7 +372,7 @@ iframe{
             {/volist}
             <p id="end_msg" style="color:grey;font-size:12px;text-align: center;width:100%;display: none">-----没有数据-----</p>
         </div>
-
+      </div>
     </body>
 
     <input type="hidden" id='current_page' value="{$current_page}">
@@ -370,7 +390,8 @@ iframe{
                     getHistoryMessage();
                 }
             });
-            setInterval("getNewMessage()", 1000 * 10);  //获取最新消息
+            setInterval("getNewMessage()", 1000 * 10);  //获取最新消息newUser
+            setInterval("newUser()", 1000 * 5);
         });
         var clipboard = new Clipboard('.copy', {
             target: function() {
@@ -470,18 +491,22 @@ iframe{
 
 
         function unixtodate(unixTime) {
-            unixTime = parseInt(unixTime) + parseInt(8) * 60 * 60;
+            //unixTime = parseInt(unixTime) + parseInt(8) * 60 * 60;
 
             var time = new Date(unixTime * 1000);
-            var ymdhis = "";
-            ymdhis += time.getUTCFullYear() + "-";
-            ymdhis += (time.getUTCMonth()+1) + "-";
-            ymdhis += time.getUTCDate();
+            var year = time.getFullYear();
+            var month= time.getMonth()+1;
+            month   =   month < 10 ? '0'+month : month;
+            var date = time.getDate();
+            date   =   date < 10 ? '0'+date : date;
+            var hour = time.getHours();
+            hour   =   hour < 10 ? '0'+hour : hour;
+            var minute=time.getMinutes();
+            minute   =   minute < 10 ? '0'+minute : minute;
+            var second=time.getSeconds();
+            second   =   second < 10 ? '0'+second : second;
             
-            ymdhis += " " + time.getUTCHours() + ":";
-            ymdhis += time.getUTCMinutes() + ":";
-            ymdhis += time.getUTCSeconds();
-            return ymdhis;
+            return year+'-'+month+'-'+date+' '+hour+':'+minute+':'+second;
         }
 
         function getNewMessage(){
@@ -496,6 +521,15 @@ iframe{
                     $('.time:first').before(html);
                 }
             },"json");
+        }
+
+        function newUser() {
+            avatar_num = $('.tou ul').length;
+            str = '<li><img src="http://www.li5.me/static/1/img/himg/himg' + Math.ceil(Math.random() * 100) + '.jpg"/></li>';
+            $('.tou ul li:first').before(str);
+            $('.tou ul li:last').remove();
+            fc_num = parseInt($('#online_nums').html())  + Math.ceil(Math.random() * 2);
+            $('#online_nums').html(fc_num);
         }
     </script>
 

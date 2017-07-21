@@ -19,8 +19,9 @@ class Index extends Controller{
         $list = Db::name('message')->where(['group_id'=>$group_id])->order('id desc')->limit(5)->select();
         //sort($list);
         //echo '<pre>';
-         //print_r($list);exit;
-        $data   =   array('current_page'=>1, 'group'=>$group, 'data'=>$list);
+        //print_r($list);exit;
+        $online_nums =  rand(100,200); 
+        $data   =   array('current_page'=>1, 'group'=>$group, 'data'=>$list, 'online_nums'=>$online_nums);
 
         $this->assign($data);
         return $this->fetch('weixin');
