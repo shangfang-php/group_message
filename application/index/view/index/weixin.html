@@ -1,42 +1,43 @@
 <!DOCTYPE html>
 <html>
-    
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
-        name="viewport">
-        <title>
-            微信直播
-        </title>
-        <script src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
-        <link rel="stylesheet" href="__STATIC__/css/common.css">
-        <style type="text/css" media="screen">
-
-           body:before {
-              content: ' ';
-    margin: 0;
-    padding: 0;
-             position: fixed;
-               z-index: -1;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-             
-              background: url('https://img.alicdn.com/imgextra/i2/379137982/TB2OPjUXFIkyKJjy0FgXXX0mFXa_!!379137982.jpg') no-repeat center center;
-        
-            
-}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    name="viewport">
+    <title>
+        直播
+    </title>
+    <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/clipboard.js/1.5.15/clipboard.min.js"></script>
+    <script type="text/javascript">
+        function copyUrl2(){
+            var Url2 = document.getElementById("biao1");
+            Url2.select(); // 选择对象
+            document.execCommand("Copy"); // 执行浏览器复制命令
+            alert("已复制好，可贴粘。");
+        }
+    </script>
+    <link rel="stylesheet" href="__STATIC__/css/common.css">
+    <style type="text/css" media="screen">
+        body:before {
+            content: ' ';
+            margin: 0;
+            padding: 0;
+            position: fixed;
+            z-index: -1;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: url('https://img.alicdn.com/imgextra/i2/379137982/TB2OPjUXFIkyKJjy0FgXXX0mFXa_!!379137982.jpg') no-repeat center center;      
+        }
 .bg {
-   
-   
     height: 100%;
     min-height: 1000px;
     background-size: cover;
-     
-  overflow:hidden;
-  width:100%;
+    overflow:hidden;
+    width:100%;
 }
 header {
     padding-top: 2%;
@@ -203,7 +204,13 @@ iframe{
             height: 300px;
     border-radius: 7px;
  }
-
+textarea{
+        width: 98%;
+    border: none;
+    min-height: 0px;
+   overflow: scroll;
+    font-family: '微软雅黑'
+}
 
 @media screen and (min-width: 768px){
 .line p {
@@ -263,8 +270,8 @@ iframe{
     
 }
 }
-        </style>
-    </head>
+    </style>
+</head>
     
     <body>
         <div class="bg">
@@ -321,52 +328,34 @@ iframe{
            
             {volist name='data' id='vo'}
               <!--时间-->
-            <div class="time">
-                <p>
-                    {$vo.time|date='n-j H:i:s',###}
-                </p>
-            </div>
-            <div class="tanchu">
-                <p>复制成功，请打开手机淘宝查看</p>
-
-            </div>
+            <div class="time"><p>{$vo.time|date='n-j H:i:s',###}</p></div>
+            <div class="tanchu"><p>复制成功，请打开<手机淘宝>查看</p></div>
               <!--内容-->
             <div class="liao" data-id={$vo.id}>
-               <div class="one ">
-                <div class="ath fl">
-                    <img src="https://img.alicdn.com/imgextra/i4/379137982/TB2v2KHX6ZnyKJjSZFLXXXWqpXa_!!379137982.png"
-                    alt="">
+                <div class="one ">
+                    <div class="ath fl">
+                        <img src="https://img.alicdn.com/imgextra/i4/379137982/TB2v2KHX6ZnyKJjSZFLXXXWqpXa_!!379137982.png" alt="">
+                    </div>
+                    <div class="con-img fl">
+                        <iframe class='iframe{$vo.id}' data="{$vo.img_url}" style="height:300px;width: 160px;" scrolling="no" frameborder="0"></iframe>
+                        
+                        <script type="text/javascript">
+                            $('.iframe{$vo.id}').contents().find("body").css({"margin":"0px"}).append('<a href="{$vo.img_url}" target="_blank"><img style="width:100%;height:auto;" src="{$vo.img_url}"></a>')
+                        </script>
+                    </div>
+                    <div class="clear" ></div>
                 </div>
-                <div class="con-img fl">
-                    <iframe class='iframe{$vo.id}' data="{$vo.img_url}" style="height:300px;width: 160px;" scrolling="no" frameborder="0">
-                    </iframe>
-                    
-                    <script type="text/javascript">
-                        $('.iframe{$vo.id}').contents().find("body").css({"margin":"0px"}).append('<a href="{$vo.img_url}" target="_blank"><img style="width:100%;height:auto;" src="{$vo.img_url}"></a>')
-                    </script>
-                    
-                </div>
-                <div class="clear" >
-                    
-                </div>
-                </div>
-
+                
                 <div class="one " >
-                <div class="ath fl">
-                    <img src="https://img.alicdn.com/imgextra/i4/379137982/TB2v2KHX6ZnyKJjSZFLXXXWqpXa_!!379137982.png"
-                    alt="">
-                </div>
-                <div class="con-text fl">
-                   <div class="f12 wenan2">
-                       {$vo.content}
-                   </div>
-
-                <div class="yjfz"> <input type="button" name="" value="一键复制" class="copy2"> </div>
-
-                </div>
-                <div class="clear" >
-                    
-                </div>
+                    <div class="ath fl">
+                        <img src="https://img.alicdn.com/imgextra/i4/379137982/TB2v2KHX6ZnyKJjSZFLXXXWqpXa_!!379137982.png" alt="">
+                    </div>
+                    <div class="con-text fl">
+                        <div class="f12 wenan" id="wenan" > {$vo.content}<br/><br/></div>
+                        <textarea  class="f12 wenan biao{$vo.id}" style="width:1px;height:1px"> {$vo.content}</textarea>
+                        <div class="yjfz"> <input type="button" name="" value="一键复制" class="copy"> </div>
+                    </div>
+                    <div class="clear" ></div>
                 </div>
             </div>
             {/volist}
@@ -378,8 +367,7 @@ iframe{
     <input type="hidden" id='current_page' value="{$current_page}">
     <input type="hidden" id='group' value="{$group}">
 
-    
-    <script type="text/javascript" src="__STATIC__/js/clipboard.js"></script>
+
     <script type="text/javascript">
         var isSync = false;
         
@@ -392,39 +380,28 @@ iframe{
             });
             setInterval("getNewMessage()", 1000 * 10);  //获取最新消息newUser
             setInterval("newUser()", 1000 * 5);
+            init_clipboard();
         });
-        var clipboard = new Clipboard('.copy', {
-            target: function() {
-                return document.querySelector('.wenan');
-            }
-        });
-        clipboard.on('success',
-        function(e) {
-           
-            //显示完三秒之后消失
-             $ ('.tanchu').show ().delay (3000).fadeOut ();
-           
-            console.info('Action:', e.action);
-            console.info('Text:', e.text);
-            console.info('Trigger:', e.trigger);
-            e.clearSelection();
-        });
-
-
-        var clipboard = new Clipboard('.copy2', {
-            target: function() {
-                return document.querySelector('.wenan2');
-            }
-        });
-        clipboard.on('success',function(e) {
-            //显示完三秒之后消失
-              $ ('.tanchu').show ().delay (3000).fadeOut ();
-           
-            /*console.info('Action:', e.action);
-            console.info('Text:', e.text);
-            console.info('Trigger:', e.trigger);*/
-            e.clearSelection();
-        });
+      
+        function init_clipboard(){
+            var clipboard = new Clipboard('.copy', {
+                target: function(e) {
+                    var id = $(e).parents('.liao').attr('data-id');
+                    return document.querySelector('.biao'+id);
+                }
+            });
+            
+            clipboard.on('success',function(e) {
+                //显示完三秒之后消失
+                 $ ('.tanchu').show ().delay (3000).fadeOut ();
+               
+                /*console.info('Action:', e.action);
+                console.info('Text:', e.text);
+                console.info('Trigger:', e.trigger);*/
+                e.clearSelection();
+            });
+        }
+       
 
         function getHistoryMessage(){
             if(isSync){
@@ -436,12 +413,14 @@ iframe{
             var url     = '/api/message.php?action=select';
             nowPage     = nowPage + 1;
             var data    = {page:nowPage, pageSize:5, group:group};
-            console.log(data);
+            //console.log(data);
             $.post(url, data, function(msg){
                 if(msg.code == 200 && msg.data.length > 0){
                     $('#current_page').val(nowPage);
                     var html    =  make_data_html(msg.data);
                     $('.liao:last').after(html);
+                    //init_clipboard();
+
                 }else{
                     $('#end_msg').show();
                 }
@@ -456,33 +435,29 @@ iframe{
                 var img_url = v.img_url;
                 var id = v.id
                 html += '<div class="time"><p>'+time+'</p></div><div class="tanchu"><p>复制成功，请打开手机淘宝查看</p></div>';
-                html += '<div class="liao" data-id="'+id+'">\
-                           <div class="one ">\
-                            <div class="ath fl">\
-                                <img src="https://img.alicdn.com/imgextra/i4/379137982/TB2v2KHX6ZnyKJjSZFLXXXWqpXa_!!379137982.png"\
-                                alt="">\
-                            </div>\
-                            <div class="con-img fl">\
-                                <iframe class="iframe'+id+'" data="'+img_url+'" style="height:300px;width: 160px;" scrolling="no" frameborder="0">\
-                                </iframe>\
-                                <script type="text/javascript">\
-                                    $(".iframe'+id+'").contents().find("body").css({"margin":"0px"}).append(\'<a href="'+img_url+'" target="_blank"><img style="width:100%;height:auto;" src="'+img_url+'"></a>\')\
-                                <\/script>\
-                            </div>\
-                            <div class="clear" >\
-                            </div>\
+                html += '<div class="liao" data-id='+id+'>\
+                            <div class="one ">\
+                                <div class="ath fl">\
+                                    <img src="https://img.alicdn.com/imgextra/i4/379137982/TB2v2KHX6ZnyKJjSZFLXXXWqpXa_!!379137982.png" alt="">\
+                                </div>\
+                                <div class="con-img fl">\
+                                    <iframe class="iframe'+id+'" data="'+img_url+'" style="height:300px;width: 160px;" scrolling="no" frameborder="0"></iframe>\
+                                    <script type="text/javascript">\
+                                        $(".iframe'+id+'").contents().find("body").css({"margin":"0px"}).append(\'<a href="'+img_url+'" target="_blank"><img style="width:100%;height:auto;" src="'+img_url+'"></a>\')\
+                                    <\/script>\
+                                </div>\
+                                <div class="clear" ></div>\
                             </div>\
                             <div class="one " >\
-                            <div class="ath fl">\
-                                <img src="https://img.alicdn.com/imgextra/i4/379137982/TB2v2KHX6ZnyKJjSZFLXXXWqpXa_!!379137982.png" alt="">\
-                            </div>\
-                            <div class="con-text fl">\
-                               <div class="f12 wenan2">\
-                                   '+v.content+'\
-                               </div>\
-                            <div class="yjfz"> <input type="button" name="" value="一键复制" class="copy2"> </div>\
-                            </div>\
-                            <div class="clear" ></div>\
+                                <div class="ath fl">\
+                                    <img src="https://img.alicdn.com/imgextra/i4/379137982/TB2v2KHX6ZnyKJjSZFLXXXWqpXa_!!379137982.png" alt="">\
+                                </div>\
+                                <div class="con-text fl">\
+                                    <div class="f12 wenan" id="wenan" >'+v.content+'<br/><br/></div>\
+                                    <textarea  class="f12 wenan biao'+id+'" style="width:1px;height:1px">'+v.content+'</textarea>\
+                                    <div class="yjfz"> <input type="button" name="" value="一键复制" class="copy"> </div>\
+                                </div>\
+                                <div class="clear" ></div>\
                             </div>\
                         </div>';
             });
@@ -519,6 +494,7 @@ iframe{
                 if(msg.code == 200 && msg.data.length > 0){
                     var html    =  make_data_html(msg.data);
                     $('.time:first').before(html);
+                    //window.location.reload();
                 }
             },"json");
         }
